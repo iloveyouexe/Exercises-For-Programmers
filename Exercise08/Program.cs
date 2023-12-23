@@ -1,4 +1,6 @@
-﻿Console.Write("How many people? ");
+﻿using System;
+
+Console.Write("How many people? ");
 double numberOfPeople = Convert.ToDouble(Console.ReadLine());
 
 Console.Write("How many pizzas do you have? ");
