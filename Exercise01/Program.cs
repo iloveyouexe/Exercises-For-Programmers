@@ -1,6 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-var name = "Brian";
+﻿var name = "Brian";
 
 Console.Write("What is your name?");
 Console.WriteLine(name);
