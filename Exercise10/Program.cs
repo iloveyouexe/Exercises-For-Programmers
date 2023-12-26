@@ -1,4 +1,4 @@
-﻿// three item checkout
+﻿// three items only
 
 // item 1
 Console.Write("Enter the price of item 1: ");
