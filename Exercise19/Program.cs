@@ -9,14 +9,15 @@ if (bmi > 18.5 && bmi < 25)
 {
     Console.WriteLine($"Your BMI is {bmi:F1}.");
     Console.WriteLine("You are within the ideal weight range.");
-    Environment.Exit(0);
 }
 else if (bmi >= 25)
 {
     Console.WriteLine($"Your BMI is {bmi:F1}.");
     Console.WriteLine("You are overweight. You should see your doctor. ");
-    Environment.Exit(0);
+}
+else
+{
+    Console.WriteLine($"Your BMI is {bmi:F1}.");
+    Console.WriteLine("You are underweight. You should see your doctor. ");
 }
 
-Console.WriteLine($"Your BMI is {bmi:F1}.");
-Console.WriteLine("You are underweight. You should see your doctor. ");
