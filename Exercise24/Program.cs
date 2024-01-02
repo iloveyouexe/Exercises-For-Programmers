@@ -1,4 +1,4 @@
-﻿namespace Exercise24;
+namespace Exercise24;
 
 static class Program
 {
