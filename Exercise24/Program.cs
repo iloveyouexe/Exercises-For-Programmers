@@ -1,4 +1,4 @@
-﻿namespace Exercise24;
+namespace Exercise24;
 
 static class Program
 {
@@ -12,12 +12,19 @@ static class Program
 
         bool isAnagram = IsAnagram(firstString, secondString);
 
-        Console.WriteLine(isAnagram ? "The strings are anagrams!" : "The strings are not anagrams.");
+        if (isAnagram)
+        {
+            Console.WriteLine("The strings are anagrams!");
+        }
+        else
+        {
+            Console.WriteLine("The strings are not anagrams.");
+        }
     }
 
     static bool IsAnagram(string? first, string? second)
     {
-        if (first != null && second != null && first.Length != second.Length)
+        if (second != null && first != null && first.Length != second.Length)
         {
             return false;
         }
@@ -27,9 +34,13 @@ static class Program
         if (first != null)
             foreach (char c in first)
             {
-                if (!charCount.TryAdd(c, 1))
+                if (charCount.ContainsKey(c))
                 {
                     charCount[c]++;
+                }
+                else
+                {
+                    charCount[c] = 1;
                 }
             }
 
