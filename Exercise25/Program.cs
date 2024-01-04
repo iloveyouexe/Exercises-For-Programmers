@@ -1,51 +1,71 @@
-﻿using System.Text.RegularExpressions;
-
-namespace Exercise25
+﻿namespace Exercise25
 {
     static class Program
     {
         static void Main()
         {
-            Console.Write("Enter the password you wish to test: ");
+            Console.WriteLine("Enter a password and I'll tell you its strength: ");
+            Console.Write("Enter the password: ");
             string? password = Console.ReadLine();
 
-            string complexity = CheckPasswordComplexity(password);
-            Console.WriteLine($"The password '{password}' is a {complexity} password.");
+            if (password != null)
+            {
+                PasswordStrength strength = PasswordValidator(password);
+
+                Console.WriteLine($"The password '{password}' is a {strength} password.");
+            }
         }
 
-        static string CheckPasswordComplexity(string? password)
+        enum PasswordStrength
         {
-            if (IsNumeric(password) && password!.Length < 8)
-            {
-                return "very weak";
-            }
-
-            if (IsAlpha(password) && password!.Length < 8)
-            {
-                return "weak";
-            }
-
-            if (Regex.IsMatch(password!, @"^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9\s]).+$"))
-            {
-                return "strong";
-            }
-            
-            if (Regex.IsMatch(password!, @"^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9\s]).+$") && password!.Length >= 8)
-            {
-                return "very strong";
-            }
-
-            return "unknown"; 
+            VeryWeak,
+            Weak,
+            Strong,
+            VeryStrong
         }
 
-        static bool IsNumeric(string? value)
+        static PasswordStrength PasswordValidator(string password)
         {
-            return int.TryParse(value, out _);
-        }
+            bool hasLetters = false;
+            bool hasNumbers = false;
+            bool hasSpecialCharacters = false;
 
-        static bool IsAlpha(string? value)
-        {
-            return Regex.IsMatch(value!, @"^[A-Za-z]+$");
+            foreach (char c in password)
+            {
+                if (char.IsLetter(c))
+                {
+                    hasLetters = true;
+                }
+                else if (char.IsNumber(c))
+                {
+                    hasNumbers = true;
+                }
+                else if (!char.IsWhiteSpace(c))
+                {
+                    hasSpecialCharacters = true;
+                }
+            }
+
+            if (!hasLetters && hasNumbers && password.Length < 8)
+            {
+                return PasswordStrength.VeryWeak;
+            }
+            else if (hasLetters && !hasNumbers && password.Length < 8)
+            {
+                return PasswordStrength.Weak;
+            }
+            else if (hasLetters && hasNumbers && password.Length >= 8 && !hasSpecialCharacters)
+            {
+                return PasswordStrength.Strong;
+            }
+            else if (hasLetters && hasNumbers && hasSpecialCharacters && password.Length >= 8)
+            {
+                return PasswordStrength.VeryStrong;
+            }
+            else
+            {
+                throw new ArgumentException("Invalid password");
+            }
         }
     }
 }
