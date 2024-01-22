@@ -6,7 +6,6 @@
         {
             Console.Write("What is your balance? ");
             double balance = Convert.ToDouble(Console.ReadLine());
-
             Console.Write("What is the APR of the card (as a percent)? ");
             double apr = Convert.ToDouble(Console.ReadLine());
 
