@@ -1,7 +1,25 @@
-﻿class Program
+﻿    class Employee
+    {
+        public string Name { get; set; }
+        public string Position { get; set; }
+        public DateTime SeparationDate { get; set; }
+    }
+    
+class Program
 {
     static void Main()
     {
-        Console.WriteLine("Eventually I'll be problem 40.");
+        List<Employee> employees = new List<Employee>
+        {
+            new Employee { Name = "John Smith", Position = "Manager", SeparationDate = DateTime.Parse("2022-01-27") },
+            new Employee { Name = "Tou Xiong", Position = "Developer", SeparationDate = DateTime.Parse("2023-05-15") },
+            new Employee { Name = "Michaela Michaelson", Position = "Designer", SeparationDate = DateTime.Parse("2021-12-10") },
+            new Employee { Name = "Jake Jacobson", Position = "Analyst", SeparationDate = DateTime.Parse("2024-02-01") },
+            new Employee { Name = "Jacquelyn Jackson", Position = "Engineer", SeparationDate = DateTime.Parse("2023-07-20") },
+            new Employee { Name = "Sally Weber", Position = "Administrator", SeparationDate = DateTime.Parse("2022-08-05") }
+        };
+        
+        Console.Write("Enter a search string: ");
+        var searchString = Console.ReadLine();
     }
 }
