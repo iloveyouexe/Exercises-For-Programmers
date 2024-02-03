@@ -20,6 +20,26 @@ class Program
         };
         
         Console.Write("Enter a search string: ");
+        
         var searchString = Console.ReadLine();
+        string? searchWords = Convert.ToString(searchString);
+        
+        Console.WriteLine("Results: ");
+        Console.WriteLine("       Name         |      Position     | Separation Date");
+        Console.WriteLine("--------------------|-------------------|----------------");
+        
+        var filteredEmployees = employees.Where(employee =>
+        {
+            return searchWords!.Any(word => employee.Name.Contains(word, StringComparison.OrdinalIgnoreCase))
+                   || searchWords!.Any(word => employee.Position.Contains(word, StringComparison.OrdinalIgnoreCase))
+                   || searchWords!.Any(word =>
+                       employee.SeparationDate.ToString("yyyy-MM-dd")
+                           .Contains(word, StringComparison.OrdinalIgnoreCase));
+        });
+        
+        foreach (var employee in filteredEmployees)
+        {
+            Console.WriteLine($"{employee.Name,-19} | {employee.Position,-17} | {employee.SeparationDate:yyyy-MM-dd}");
+        }
     }
 }
