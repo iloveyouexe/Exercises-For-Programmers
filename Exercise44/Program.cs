@@ -7,11 +7,11 @@ class Program
 {
     static void Main()
     {
-        List<Product> products = LoadProductsFromJson("data.json");
+        List<Product?> products = LoadProductsFromJson("Data/data.json");
 
         while (true)
         {
-            string productName = PromptForProductName();
+            string? productName = PromptForProductName();
             SearchAndPrintProductDetails(products, productName);
 
             if (!AskForAnotherSearch())
@@ -19,22 +19,22 @@ class Program
         }
     }
 
-    static List<Product> LoadProductsFromJson(string jsonFilePath)
+    static List<Product?> LoadProductsFromJson(string jsonFilePath)
     {
         string jsonData = File.ReadAllText(jsonFilePath);
         ProductList productList = JsonSerializer.Deserialize<ProductList>(jsonData);
         return productList.Products;
     }
 
-    static string PromptForProductName()
+    static string? PromptForProductName()
     {
         Console.WriteLine("What is the product name? ");
         return Console.ReadLine();
     }
 
-    static void SearchAndPrintProductDetails(List<Product> products, string productName)
+    static void SearchAndPrintProductDetails(List<Product?> products, string? productName)
     {
-        Product product = products.Find(p => p.Name.Equals(productName, StringComparison.OrdinalIgnoreCase));
+        Product? product = products.Find(p => p.Name.Equals(productName, StringComparison.OrdinalIgnoreCase));
 
         if (product != null)
         {
@@ -46,7 +46,7 @@ class Program
         }
     }
 
-    static void PrintProductDetails(Product product)
+    static void PrintProductDetails(Product? product)
     {
         Console.WriteLine($"Name: {product.Name}");
         Console.WriteLine($"Price: ${product.Price:F2}");
@@ -63,7 +63,7 @@ class Program
 
 class ProductList
 {
-    public List<Product> Products { get; set; }
+    public List<Product?> Products { get; set; }
 }
 
 class Product
