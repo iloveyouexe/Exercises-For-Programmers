@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using static System.StringComparison;
 
 class Program
 {
@@ -15,7 +16,10 @@ class Program
         string content = File.ReadAllText(inputFile);
         
         int replacements = 0;
-        string modifiedContent = content.Replace("utilize", "use", StringComparison.OrdinalIgnoreCase, out replacements);
+        string modifiedContent = content.Replace(oldValue: "utilize",
+            newValue: "use",
+            ignoreCase: OrdinalIgnoreCase,
+            culture: out replacements);
         
         File.WriteAllText(outputFile, modifiedContent);
 
