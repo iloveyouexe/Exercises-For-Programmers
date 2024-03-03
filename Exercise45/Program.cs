@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
-using static System.StringComparison;
+using System.Text.RegularExpressions; // Include this namespace for Regex
 
 class Program
 {
     static void Main()
     {
-        //start
+        // Start
         Console.WriteLine("Enter the input file name:");
         string inputFile = Console.ReadLine();
 
@@ -14,13 +14,15 @@ class Program
         string outputFile = Console.ReadLine();
         
         string content = File.ReadAllText(inputFile);
+
+        // Use Regex for case-insensitive replacement
+        string pattern = "utilize";
+        string replacement = "use";
+        string modifiedContent = Regex.Replace(content, pattern, replacement, RegexOptions.IgnoreCase);
         
-        int replacements = 0;
-        string modifiedContent = content.Replace(oldValue: "utilize",
-            newValue: "use",
-            ignoreCase: OrdinalIgnoreCase,
-            culture: out replacements);
-        
+        // Count replacements by comparing original and modified content
+        int replacements = (content.Length - modifiedContent.Length) / (pattern.Length - replacement.Length);
+
         File.WriteAllText(outputFile, modifiedContent);
 
         Console.WriteLine($"File has been modified and saved as {outputFile}");
