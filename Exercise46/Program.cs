@@ -2,6 +2,6 @@
 {
     static void Main()
     {
-        Console.Write("hi");
+        Console.Write("is git configured");
     }
 }
