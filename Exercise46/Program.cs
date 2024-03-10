@@ -2,6 +2,6 @@
 {
     static void Main()
     {
-        Console.Write("is git configured");
+        Console.Write("Future ex 46");
     }
 }
