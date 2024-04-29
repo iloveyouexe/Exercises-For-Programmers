@@ -2,6 +2,6 @@
 {
     static void Main()
     {
-        Console.Write("resetting");
+      console.WriteLine("Test");
     }
 }
